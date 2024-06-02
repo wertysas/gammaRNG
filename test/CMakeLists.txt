@@ -2,12 +2,12 @@ add_executable(gamma_cpp_test cpp/generator_test.cpp)
 target_include_directories(gamma_cpp_test PRIVATE ${CXX_INCLUDE_DIR})
 
 # OpenMP Tests
-if(OpenMP_CXX_FOUND)
+#if(OpenMP_CXX_FOUND)
     # add_executable(gamma_omp_test openmp/gamma_omp.cpp)
     # target_include_directories(gamma_omp_test PRIVATE ${OPENMP_INCLUDE_DIR})
     # target_include_directories(gamma_omp_test PRIVATE ${CXX_INCLUDE_DIR})
     # target_link_libraries(gamma_omp_test OpenMP::OpenMP_CXX)
-endif()
+#endif()
 
 
 
