@@ -19,9 +19,5 @@ if(CUDAToolkit_FOUND)
             ${CUDA_SOURCE_DIR}/curand_util.cu)
     target_include_directories(gamma_kernel_test PRIVATE ${CMAKE_SOURCE_DIR}/include/cuda)
     target_link_libraries(gamma_kernel_test CUDA::cudart)
-
-    target_include_directories(kernel_test PRIVATE ${CMAKE_SOURCE_DIR}/include/cuda)
-    target_link_libraries(kernel_test CUDA::cudart)
-
 endif()
 
