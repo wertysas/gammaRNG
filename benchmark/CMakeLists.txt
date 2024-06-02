@@ -24,18 +24,9 @@ if(CUDAToolkit_FOUND)
     target_link_libraries(gamma_generator CUDA::cudart)
 
 
-    add_executable(curand_host_normal
-            cuda/curand_host_normal.cu
-    )
-    target_include_directories(curand_host_normal PRIVATE ${CMAKE_SOURCE_DIR}/include/cuda)
-    target_link_libraries(curand_host_normal CUDA::cudart)
-    target_link_libraries(curand_host_normal CUDA::curand)
-
-
     add_executable(gamma_kernel_benchmark
             cuda/gamma_benchmark.cu
-            ${CUGAMMA_SOURCE_DIR}/cuda/gamma_generators.cu
-            ../src/cuda/curand_util.cu
+            ${CUGAMMA_SOURCE_DIR}/cuda/curand_util.cu
     )
     target_include_directories(gamma_kernel_benchmark PRIVATE ${CMAKE_SOURCE_DIR}/include/cuda)
     target_link_libraries(gamma_kernel_benchmark CUDA::cudart)
