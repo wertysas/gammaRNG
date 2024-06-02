@@ -1,0 +1,41 @@
+
+# Use Latex Fonts
+text.usetex: True
+# Include additional LaTeX commands (optional)
+#text.latex.preamble: \usepackage{cmbright}
+text.latex.preamble: \usepackage{libertine}
+
+
+
+
+#colors
+lines.color: b
+# markers.edgecolor: auto
+# markers.facecolor: auto
+
+#markers.fillstyle: none
+#markers.size: 1
+
+
+# Figuresizes
+# figure.figsize : 8, 6
+lines.linewidth : 0.5
+axes.linewidth : 1.5
+
+# Font sizes
+font.size : 14       # General font size
+axes.titlesize : 22  # Font size for the axes title
+axes.labelsize : 16  # Font size for the x and y labels
+xtick.labelsize: 16  # Font size for the x-axis tick labels
+ytick.labelsize: 16  # Font size for the y-axis tick labels
+legend.fontsize: 14  # Font size for legend
+
+# axes.labelsize : 14
+# axes.titlesize : 16
+# xtick.labelsize : 12
+# ytick.labelsize : 12
+# legend.fontsize : 10
+
+# Figure default resolutions
+figure.dpi : 300
+savefig.dpi : 300
