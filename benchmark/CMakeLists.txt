@@ -18,7 +18,7 @@ endif()
 # CUDA Benchmarks
 if(CUDAToolkit_FOUND)
     add_executable(gamma_generator
-            ../src/cuda/curand_util.cu
+            ${GAMMARNG_SOURCE_DIR}/cuda/curand_util.cu
     )
     target_include_directories(gamma_generator PRIVATE ${CMAKE_SOURCE_DIR}/include/cuda)
     target_link_libraries(gamma_generator CUDA::cudart)
@@ -26,7 +26,7 @@ if(CUDAToolkit_FOUND)
 
     add_executable(gamma_kernel_benchmark
             cuda/gamma_benchmark.cu
-            ${CUGAMMA_SOURCE_DIR}/cuda/curand_util.cu
+            ${GAMMARNG_SOURCE_DIR}/cuda/curand_util.cu
     )
     target_include_directories(gamma_kernel_benchmark PRIVATE ${CMAKE_SOURCE_DIR}/include/cuda)
     target_link_libraries(gamma_kernel_benchmark CUDA::cudart)
