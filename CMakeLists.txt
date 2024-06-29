@@ -26,7 +26,7 @@ find_package(CUDAToolkit) # defines imported targets for all CUDA libs
 if(CUDAToolkit_FOUND)
     message(STATUS "CUDA Toolkit found.")
     enable_language(CUDA)
-    set(CMAKE_CUDA_ARCHITECTURES 89)
+    # set(CMAKE_CUDA_ARCHITECTURES 89) # Uncomment to specify custom CUDA architecture
     set(CMAKE_CUDA_STANDARD 20)
     set(CMAKE_CUDA_FLAGS "-O3")
 else()
