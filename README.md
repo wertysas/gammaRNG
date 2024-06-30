@@ -1,6 +1,6 @@
 # gammaRNG
 
-This repo contains the CUDA implementation of five gamma generator kernels and benchmarking code for the M.Sc. thesis : [**Gamma Random Number Generation on GPUs using CUDA**](wertysas.github.io/documents/gamma_rng_on_gpus.pdf)
+This repo contains the CUDA implementation of five gamma generator kernels and benchmarking code for the M.Sc. thesis : [**Gamma Random Number Generation on GPUs using CUDA**](https://wertysas.github.io/documents/gamma_rng_on_gpus.pdf)
 
 **The best performing kernels on all GPUs tested are ``cheng1977`` and ``marsaglia_tsang``**
 
