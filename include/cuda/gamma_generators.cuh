@@ -118,8 +118,11 @@ __forceinline__ __device__  RealType GKM3(CurandState &rng_state, const RealType
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Other
-/// ////////////////////////////////////////////////////////////////////////////////
+// D. J. Best. “Letters to the Editors”. eng. In: Journal of the Royal
+// Statistical Society: Series C (Applied Statistics) 27.2 (1978), pp. 181–182.
+////////////////////////////////////////////////////////////////////////////////
+
+//
 template<typename RealType, typename CurandState=curandState>
 __forceinline__ __device__  RealType best1978(CurandState &rng_state, const RealType alpha) {
     const RealType b = alpha - RealType(1.0);
@@ -138,9 +141,13 @@ __forceinline__ __device__  RealType best1978(CurandState &rng_state, const Real
     return X;
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
-// Ahrens dieter 1974
+// Joachim H. Ahrens and Ulrich Dieter. “Computer methods for sampling from
+// gamma, beta, poisson and bionomial distributions”. In: Computing 12.3 (1974),
+// pp. 223–246.
 ////////////////////////////////////////////////////////////////////////////////
+
 // Algorithm GC
 template<typename RealType, typename CurandState=curandState>
 __forceinline__ __device__  RealType GC(CurandState &rng_state, const RealType alpha) {
@@ -163,28 +170,23 @@ __forceinline__ __device__  RealType GC(CurandState &rng_state, const RealType a
 
 
 
+////////////////////////////////////////////////////////////////////////////////
+// Other Kernels
+////////////////////////////////////////////////////////////////////////////////
+
+// Normal kernels used for reference purpose in benchmark script.
 template<typename RealType>
 __forceinline__ __device__  RealType normal_kernel(curandState &rng_state, RealType alpha) {
     return normal<RealType>(rng_state);
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Global Kernels
 ////////////////////////////////////////////////////////////////////////////////
 
-// This function assumes each thread has its own curandState
-template<typename RealType, auto GammaKernel>
-__global__ void gamma(RealType *gammas, curandState *rng_states, const uint size, RealType alpha = 1.0) {
-    unsigned int blockid = blockIdx.x;
-    unsigned int tid = blockid * blockDim.x + threadIdx.x;
-    if (tid >= size) return;
 
-    curandState rng_state = rng_states[tid];
-    gammas[tid] = GammaKernel(rng_state, alpha);
-    rng_states[tid] = rng_state;
-}
-
-// This function assumes each thread has its own curandState and generates multiple random numbers/thread
+// This function assumes each thread has its own curandState and generates multiple random numbers/thread (see usage in benchmark class for example on how to use)
 template<typename RealType, auto GammaKernel>
 __global__ void
 gamma_pt_strided(RealType *gammas, curandState *rng_states, const size_t num_rands, const RealType alpha = 1.0) {
@@ -227,6 +229,17 @@ __global__ void gamma_pt(RealType *gammas, curandState *rng_states, const uint n
     rng_states[tid] = rng_state;
 }
 
+// This function assumes each thread has its own curandState (NOT RECOMMENDED)
+template<typename RealType, auto GammaKernel>
+__global__ void gamma(RealType *gammas, curandState *rng_states, const uint size, RealType alpha = 1.0) {
+    unsigned int blockid = blockIdx.x;
+    unsigned int tid = blockid * blockDim.x + threadIdx.x;
+    if (tid >= size) return;
+
+    curandState rng_state = rng_states[tid];
+    gammas[tid] = GammaKernel(rng_state, alpha);
+    rng_states[tid] = rng_state;
+}
 
 
 #endif //CUGAMMA_GAMMA_GENERATORS_CUH
